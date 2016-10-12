@@ -1,0 +1,14 @@
+{
+  "name": "js-context",
+  "version": "1.0.0",
+  "description": "JavaScript's implementation of scope and context is a unique of the language.\r - Functions can be adopted for various contexts.\r - Scope can be encapsulated and preserved.",
+  "main": "01_the_problem.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "context"
+  ],
+  "author": "Teerapong Singthong",
+  "license": "ISC"
+}
