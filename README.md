@@ -20,16 +20,20 @@ By default `this` keyword is executed rely on three type of execution context.
 
 For example:
 ```javascript
-function print () {
-    name();
+const print = function (fn) {
+    console.log(fn());
 }
 
-function name () {
-    this.name = "Teerapong Singthong";
-    return this;
+const myObj = {
+    firstname: 'Teerapong',
+    lastname: 'Singthong',
+    getFullName: function () {
+        return `${this.firstname} ${this.lastname}`
+    }
 }
 
-console.log( print(name()) );
+// the problem is that this context is dertermined by global scope
+print(myObj.getFullName); // undefined undefined
 ```
 
 [Read more](https://javascriptweblog.wordpress.com/2010/08/30/understanding-javascripts-this/)
