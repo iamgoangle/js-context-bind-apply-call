@@ -20,20 +20,48 @@ By default `this` keyword is executed rely on three type of execution context.
 
 For example:
 ```javascript
-const print = function (fn) {
-    console.log(fn());
-}
-
-const myObj = {
-    firstname: 'Teerapong',
-    lastname: 'Singthong',
-    getFullName: function () {
-        return `${this.firstname} ${this.lastname}`
-    }
-}
-
-// the problem is that this context is dertermined by global scope
-print(myObj.getFullName); // undefined undefined
+// call() / apply() and bind()
+// the mechanism to determine context of this keyword in function
+ 
+const obj = {
+                fullname: 'Teerapong Singthong',
+  getFullname() {
+                return this.fullname;
+  }
+};
+ 
+console.log(obj.getFullname());                // Teerapong Singthong
+ 
+// change context from window to another one function
+const print = (fn) => {
+                console.log(fn());
+};
+ 
+// this line will be displayed `undefined`
+print(obj.getFullname);
+ 
+// to resolve this, we need to point to correct context
+// bind() = binding the context and return as a new function
+print(obj.getFullname.bind(obj));
+ 
+// Use arrow function to be resolve
+print(() => obj.getFullname());
+ 
+// -----------------------------
+ 
+// call() / apply()
+// if we need to invoke function and change context
+const objChrome = {
+                fullname: 'Google Chrome'
+};
+ 
+const objFirefox = {
+                fullname: 'Firefox'
+};
+ 
+console.log(obj.getFullname());                     // Teerapong Singthong
+console.log(obj.getFullname.call(objChrome));       // Google Chrome
+console.log(obj.getFullname.apply(objFirefox));     // Firefox
 ```
 
 [Read more](https://javascriptweblog.wordpress.com/2010/08/30/understanding-javascripts-this/)
